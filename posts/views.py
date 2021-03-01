@@ -36,4 +36,4 @@ posts = [
 
 
 
-def list_posts( request): return render(request, 'feed.html', {'posts': posts})
+def list_posts( request): return render(request, 'posts/feed.html', {'posts': posts})
