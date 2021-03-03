@@ -5,15 +5,18 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+# Exception
 from django.db.utils import IntegrityError
 
-#Models
+# Models
 from django.contrib.auth.models import User
-from users.models import Profile 
+from users.models import Profile
+
 # Forms
 from users.forms import ProfileForm
 
 
+@login_required
 def update_profile(request):
     """Update a user's profile view."""
     profile = request.user.profile
@@ -44,6 +47,7 @@ def update_profile(request):
         }
     )
 
+
 def login_view(request):
     """Login view."""
     if request.method == 'POST':
@@ -57,6 +61,7 @@ def login_view(request):
             return render(request, 'users/login.html', {'error': 'Invalid username and password'})
 
     return render(request, 'users/login.html')
+
 
 def signup(request):
     """Sign up view."""
@@ -84,6 +89,7 @@ def signup(request):
         return redirect('login')
 
     return render(request, 'users/signup.html')
+
 
 @login_required
 def logout_view(request):
